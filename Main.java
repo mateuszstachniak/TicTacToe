@@ -23,7 +23,63 @@ public class Main {
         } else {
             System.exit(0);
         }
-        boolean xWins = false;
+        boolean wrongInput = true;
+        boolean wrongSymbolY = true;
+        boolean wrongSymbolX = true;
+        do {
+            int y = 0;
+            int x = 0;
+            System.out.print("Enter the coordinates: ");
+
+            try {
+                y = Integer.parseInt(scanner.next());
+            } catch (NumberFormatException e) {
+                wrongSymbolY = false;
+            }
+
+            try {
+                x = Integer.parseInt(scanner.next());
+            } catch (NumberFormatException e) {
+                wrongSymbolX = false;
+            }
+
+            if (wrongSymbolY == false || wrongSymbolX == false) {
+                System.out.println("You should enter numbers!");
+                continue;
+            }
+
+            if (y < 1 || y > 3 || x < 1 || x > 3) {
+                System.out.println("Coordinates should be from 1 to 3!");
+                continue;
+            }
+
+            int x1 = 0;
+            if (x >= 1 && x <= 3) {
+                if (y == 1) {
+                    x1 = 0 + x - 1;
+                } else if (y == 2) {
+                    x1 = 3 + x - 1;
+                } else if (y == 3) {
+                    x1 = 6 + x - 1;
+                }
+            }
+
+            if (symbol[x1] == 'X' || symbol[x1] == 'O') {
+                System.out.println("This cell is occupied! Choose another one!");
+                continue;
+            } else {
+                symbol[x1] = 'X';
+                wrongInput = false;
+            }
+        } while (wrongInput);
+
+        System.out.println("---------");
+        System.out.println("| " + symbol[0] + " " + symbol[1] + " " + symbol[2] + " |");
+        System.out.println("| " + symbol[3] + " " + symbol[4] + " " + symbol[5] + " |");
+        System.out.println("| " + symbol[6] + " " + symbol[7] + " " + symbol[8] + " |");
+        System.out.println("---------");
+
+/*        boolean xWins = false;
         boolean oWins = false;
         boolean draw = false;
         boolean impossible = false;
@@ -84,6 +140,6 @@ public class Main {
             System.out.println("Impossible");
         } else {
             System.out.println("Game not finished");
-        }
+        } */
     }
 }
